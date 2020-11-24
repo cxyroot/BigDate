@@ -19,8 +19,34 @@ git push -u origin master
 
 
 
-```
+```shell
 git remote add origin https://github.com/cxyroot/BigDate.git
 git branch -M master
 git push -u origin master
+
+
+
+seckill in:name
+查询的github上点赞数
+springboot start:>=500
+
+查询github上的forks
+springboot forks:500
+
+springboot  start:80..100 forks:100:200
+
+awesome tomcat 
+
+redis
+
+
+
+在github上使用 #L来高亮显示代码
+https://github.com/cxyroot/Tomcat8Src/blob/master/bin/configtest.sh#L13
+
+小写英文字母t
+
+
+
 ```
+

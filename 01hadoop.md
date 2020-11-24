@@ -431,6 +431,14 @@ hadoop的持久化策略。Fsimage，edits.log
 
 
 
+# 15hadoop_ha原理
+
+脑裂的错误
+
+使用zk实现ha
+
+
+
 
 
 

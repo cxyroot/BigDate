@@ -26,6 +26,10 @@ bin/spark-submit \
 
 bin/spark-shell
 
+监控地址
+
+http://192.168.10.120:4040
+
 ```
 mkdir input
 1.txt

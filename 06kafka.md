@@ -1,4 +1,4 @@
-# 1
+# 1kafka简介
 
 # 2配置kafka集群
 
@@ -8,7 +8,9 @@
 
 ## 3：修改名称 
 
-## 4：创建logs文件，mkdir logs
+## 4：创建logs文件
+
+## 	mkdir logs
 
 ## 5：进入config，修改 vim server.properties 
 
@@ -161,15 +163,29 @@ group.initial.rebalance.delay.ms=0
 
 ## 6：配置集群
 
+已经配置完成主要是修改server.properties
+
 ## 7：逐个启动集群（3台机器）
+
+先启动zk
+
+1：启动zookeeper命令
+
+ 	bin/zkServer.sh start
+
+2：查看zookeeper状态命令	
+
+​	 bin/zkServer.sh status
 
 ### 默认启动：
 
 ​				bin/zkServer.sh start
 
-​				bin/kafka-server-start.sh -daemon config/server.properties
+### 启动命令
 
-## 8:群起脚本
+​				bin/kafka-server-start.sh  -daemon  config/server.properties
+
+## 8群起脚本
 
 ```shell
 #! /bin/bash
@@ -197,9 +213,15 @@ esac
 
 ### 后台启动：
 
-# 3kafka命令
+
+
+# 3kafka命令行操作
 
 ## 1:查询分区
+
+bin/kafka-topics.sh  
+
+可以查看命令简述
 
 bin/kafka-topics.sh --zookeeper node01:2181 --list
 
@@ -207,23 +229,43 @@ bin/kafka-topics.sh --zookeeper node01:2181 --list
 
 ## 2:创建分区topics 
 
-bin/kafka-topics.sh --zookeeper node01:2181 --create --topic first --partitions  3 --replication-factor 2
+first 为名字
 
-bin/kafka-topics.sh --zookeeper node01:2181 --create --replication-factor 3 --partitions 1 --topic first
+3为分区副本数据
+
+2为定义的分区数
+
+bin/kafka-topics.sh --zookeeper node01:2181 --create --topic  first  --partitions  3 --replication-factor 2
+
+
+
+bin/kafka-topics.sh --zookeeper node01:2181 --create --replication-factor 3 --partitions 1 --topic   
+
+
+
+修改分区数
+
+topics的分区 数量只能增加
+
+bin/kafka-topics.sh --zookeeper node01:2181 --alter --partitions  5 --topic first
 
 ## 3：查看topic的详情
 
 bin/kafka-topics.sh --zookeeper node01:2181 --describe --topic first
 
-## 4：发送消息到kafka
+![image-20201124210355628](D:\Note\06kafka\image-20201124210355628.png)
+
+## 4：生产者生产消息
 
 ​	flume 到kafka 
 
 ​    producer 生产者
 
+​	9092kafka固定端口号
+
 ​	bin/kafka-console-producer.sh  --topic first --broker-list  node01:9092
 
-## 5：消费端消费消息
+## 5：消费者消费消息
 
 ​    consumer  消费者  
 
@@ -244,8 +286,6 @@ kafka整体工作流程
 offsset 崩溃恢复机制的
 
 # 5kafka文件存储机制
-
-
 
 # 6kafka生产过程分析
 
