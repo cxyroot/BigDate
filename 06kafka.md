@@ -1,5 +1,32 @@
 # 1kafka简介
 
+
+
+削峰填谷
+
+
+
+## kafka的主要架构
+
+1 ）Producer  ：消息生产者，就是向 kafka broker 发消息的客户端；
+2 ）Consumer  ：消息消费者，向 kafka broker 取消息的客户端；
+3 ）Consumer Group  （CG） ）： ：消费者组，由多个 consumer 组成。 消费者组内每个消费者负
+责消费不同分区的数据，一个分区只能由一个消费者消费；消费者组之间互不影响。所有
+的消费者都属于某个消费者组，即 消费者组是逻辑上的一个订阅者。
+4 ）Broker  ：一台 kafka 服务器就是一个 broker。一个集群由多个 broker 组成。一个 broker
+可以容纳多个 topic。
+5 ）Topic ： ：可以理解为一个队列，个
+生产者和消费者面向的都是一个 topic；
+6 ）Partition ：为了实现扩展性，一个非常大的 topic 可以分布到多个 broker（即服务器）上，
+个 一个 topic  可以分为多个 partition，每个 partition 是一个有序的队列；
+7 ）Replica ：副本，为保证集群中的某个节点发生故障时，该节点上的 partition 数据不丢失，
+且 kafka 仍然能够继续工作，kafka 提供了副本机制，一个 topic 的每个分区都有若干个副本，
+一个 leader 和若干个 follower。
+8 ）leader： ：每个分区多个副本的“主”，生产者发送数据的对象，以及消费者消费数据的
+对象都是 leader。
+9 ）follower ：每个分区多个副本中的“从”，实时从 leader 中同步数据，保持和 leader 数据
+的同步。leader 发生故障时，某个 follower 会成为新的 follower。
+
 # 2配置kafka集群
 
 ## 1：下载安装包
@@ -277,21 +304,66 @@ bin/kafka-topics.sh --zookeeper node01:2181 --describe --topic first
 
    --from-beginning --topic first
 
-# 4Kafka工作流程及
+# 4Kafka工作流程
 
-kafka整体工作流程
-
-先创建topic 
-
-offsset 崩溃恢复机制的
+Kafka 中消息是以 topic 进行分类的，生产者生产消息，消费者消费消息，都是面向 topic的。topic 是逻辑上的概念，而 partition 是物理上的概念，每个 partition 对应于一个 log 文件，该 log 文件中存储的就是 producer 生产的数据。Producer 生产的数据会被不断追加到该 log文件末端，且每条数据都有自己的 offset。消费者组中的每个消费者，都会实时记录自己消
+费到了哪个 offset，以便出错恢复时，从上次的位置继续消费。
 
 # 5kafka文件存储机制
 
-# 6kafka生产过程分析
+生产者将数据发给topic 消费者从topic消费数据
 
 
 
+一个topic多个 partition    一个partition 多个segment。每个 segment对应两个文件——“.index”文件和“.log”文件。
 
+
+
+## 6kafka生产者
+
+​			分区策略	1为啥要分区2分区的原则
+
+为什么半数以上同意才能选出leader
+
+​	防止脑裂
+
+参与投票的follower至少有多少
+
+​	半数以上
+
+如何保证参与投票的半数以上的follower里面至少有一个同步完成
+
+​	半数以上的follower同步完成
+
+数据可靠性保证
+
+Exactly Once语义
+
+
+
+​			
+
+## 7kafka消费者
+
+消费方式
+
+​	以下游的的速率去消费数据，缺点是容易空循环   使用timeout时间去优化空循环
+
+分区分配策略，两种分区分配策略。
+
+​	
+
+ofeset的维护
+
+# 8kafka高效读写数据
+
+顺序写磁盘   一直向文件的末端增加数据  
+
+零复制技术（零拷贝的概念）
+
+​	   不经过用户层   直接在内核层交互
+
+# 9zk在kafka中的作用
 
 
 
