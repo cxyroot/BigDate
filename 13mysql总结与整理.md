@@ -21,3 +21,12 @@ show tables;
 select *from [tablename];
 
 drop tables
+
+# 3一些实用的操作
+
+迁移数据
+
+insert into [table]
+  select *
+    from [table]
+commit;
