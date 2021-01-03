@@ -1,6 +1,8 @@
 # 01安装linux
 
-修改网络：vi /etc/hosts
+修改网络：vi /etc/hosts 
+
+​					cat /etc/hosts
 
 重启网络：service notwork resetart
 
@@ -12,6 +14,8 @@
 
 ```
 vim /etc/profile
+
+tar -xzvf jdk-8u131-linux-x64.tar.gz -C /usr/local/java
 ```
 
 
@@ -64,6 +68,12 @@ ulimit -a for user root
 
 ## 免密登录配置
 
+
+
+/root/.ssh
+
+
+
 ​	 ssh-keygen -t rsa
 
 ​	看见提示就回车
@@ -71,6 +81,8 @@ ulimit -a for user root
 ​	拷贝到其他机器上
 
 ​     ssh-copy-id hadoop102
+
+​     ssh-copy-id data002
 
 
 

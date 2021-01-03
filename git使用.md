@@ -12,7 +12,7 @@ git commit -m "first commit"
 git branch -M master
 git remote add origin https://github.com/cxyroot/BigDate.git
 git push -u origin master
-                
+              
 ```
 
 ### …or push an existing repository from the command line

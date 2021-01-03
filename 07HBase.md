@@ -275,7 +275,7 @@ export HBASE_MANAGES_ZK=false
 <configuration>
 	<property>     
 		<name>hbase.rootdir</name>     
-		<value>hdfs:/node02:9000/hbase</value>   
+		<value>hdfs:/hadoop102:9000/hbase</value>   
 	</property>
 
 	<property>   
@@ -291,7 +291,7 @@ export HBASE_MANAGES_ZK=false
 
 	<property>   
 		<name>hbase.zookeeper.quorum</name>
-	     <value>192.168.10.120:2181,192.168.10.101:2181,192.168.10.130:2181</value>
+	     <value>hadoop102:2181,hadoop103:2181,hadoop104:2181</value>
 	</property>
 
 	<property>   
@@ -312,9 +312,19 @@ export HBASE_MANAGES_ZK=false
 ### 建立连接
 
 ```sh
-ln -s /home/soft/hadoop-2.6.5/etc/hadoop/core-site.xml /home/soft/hbase-1.3.1/conf/core-site.xml
+#创建软连接
+ln -s /home/soft/hadoop-2.7.2/etc/hadoop/core-site.xml /home/soft/hbase-1.3.1/conf/core-site.xml
 
-ln -s /home/soft/hadoop-2.6.5/etc/hadoop/hdfs-site.xml /home/soft/hbase-1.3.1/conf/hdfs-site.xml
+#修改软连接
+ln -snf /home/soft/hadoop-2.7.2/etc/hadoop/core-site.xml /home/soft/hbase-1.3.1/conf/core-site.xml
+
+ln -snf /home/soft/hadoop-2.7.2/etc/hadoop/core-site.xml /home/soft/hbase/conf/core-site.xml
+
+#创建软连接
+ln -s /home/soft/hadoop-2.7.2/etc/hadoop/hdfs-site.xml /home/soft/hbase-1.3.1/conf/hdfs-site.xml
+
+#修改软连接
+ln -snf /home/soft/hadoop-2.7.2/etc/hadoop/hdfs-site.xml /home/soft/hbase-1.3.1/conf/hdfs-site.xml
 
 ```
 
@@ -337,7 +347,9 @@ bin/stop-hbase.sh
 192.168.10.120:16010
 
 ```
-http://192.168.10.120:16010
+http://192.168.10.102:16000
+192.168.10.120:16010
+http://192.168.10.102:16010/master-status
 ```
 
 

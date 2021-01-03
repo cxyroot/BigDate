@@ -39,9 +39,9 @@ clientPort=2181
 # Purge task interval in hours
 # Set to "0" to disable auto purge feature
 #autopurge.purgeInterval=1
-server.2=node01:2888:3888
-server.3=node02:2888:3888
-server.4=node03:2888:3888
+server.2=hadoop102:2888:3888
+server.3=hadoop103:2888:3888
+server.4=hadoop104:2888:3888
 ```
 
 创建zkData 
@@ -56,13 +56,12 @@ server.4=node03:2888:3888
 
 # 3zookeeper启动命令
 
-1：启动zookeeper命令
-
- 	bin/zkServer.sh start
-
-2：查看zookeeper状态命令	
-
-​	 bin/zkServer.sh status
+```shell
+#1：启动zookeeper命令
+	bin/zkServer.sh start
+#2：查看zookeeper状态命令	
+	bin/zkServer.sh status
+```
 
 # 4zookeeper命令行操作
 
@@ -102,7 +101,7 @@ caeate /ttt/ppp
 
 status /zookeeper
 
-```
+```shell
 cZxid = 0x0
 ctime = Thu Jan 01 08:00:00 CST 1970
 mZxid = 0x0
@@ -194,6 +193,7 @@ public class ZooKeeperApi {
     /*public static void main(String[] args) {
         System.out.println("Api");
     }*/
+    //ZK的地址
     private static String connectString = "192.168.10.120:2181,192.168.10.101:2181,192.168.10.130:2181";
 
     private static int sessionTimeout = 2000;
